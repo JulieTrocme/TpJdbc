@@ -122,4 +122,42 @@ public class Module{
 				+ (responsable != null ? "responsable=" + responsable.getNomProf() + ", " : "")
 				+ (pere != null ? "pere=" + pere.getCode() : "") + "]";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Module module = (Module) o;
+
+		if (hCoursPrev != module.hCoursPrev) return false;
+		if (hCoursRea != module.hCoursRea) return false;
+		if (hTpPrev != module.hTpPrev) return false;
+		if (hTpRea != module.hTpRea) return false;
+		if (coefTest != module.coefTest) return false;
+		if (coefCc != module.coefCc) return false;
+		if (!code.equals(module.code)) return false;
+		if (!libelle.equals(module.libelle)) return false;
+		if (!discipline.equals(module.discipline)) return false;
+		if (!responsable.equals(module.responsable)) return false;
+		if (!pere.equals(module.pere)) return false;
+		return specialistes.equals(module.specialistes);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = code.hashCode();
+		result = 31 * result + libelle.hashCode();
+		result = 31 * result + hCoursPrev;
+		result = 31 * result + hCoursRea;
+		result = 31 * result + hTpPrev;
+		result = 31 * result + hTpRea;
+		result = 31 * result + discipline.hashCode();
+		result = 31 * result + coefTest;
+		result = 31 * result + coefCc;
+		result = 31 * result + responsable.hashCode();
+		result = 31 * result + pere.hashCode();
+		result = 31 * result + specialistes.hashCode();
+		return result;
+	}
 }

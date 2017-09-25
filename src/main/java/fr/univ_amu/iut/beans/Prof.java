@@ -81,4 +81,32 @@ public class Prof{
 				+ (villeProf != null ? "villeProf=" + villeProf + ", " : "")
 				+ (matSpec != null ? "matSpec=" + matSpec.getCode() : "") + "]";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Prof prof = (Prof) o;
+
+		if (numProf != prof.numProf) return false;
+		if (!nomProf.equals(prof.nomProf)) return false;
+		if (!prenomProf.equals(prof.prenomProf)) return false;
+		if (!adrProf.equals(prof.adrProf)) return false;
+		if (!cpProf.equals(prof.cpProf)) return false;
+		if (!villeProf.equals(prof.villeProf)) return false;
+		return matSpec.equals(prof.matSpec);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = numProf;
+		result = 31 * result + nomProf.hashCode();
+		result = 31 * result + prenomProf.hashCode();
+		result = 31 * result + adrProf.hashCode();
+		result = 31 * result + cpProf.hashCode();
+		result = 31 * result + villeProf.hashCode();
+		result = 31 * result + matSpec.hashCode();
+		return result;
+	}
 }
