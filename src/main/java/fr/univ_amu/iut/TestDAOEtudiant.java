@@ -1,5 +1,8 @@
 package fr.univ_amu.iut;
 
+import fr.univ_amu.iut.DAO.DAO;
+import fr.univ_amu.iut.DAO.DAOEtudiant;
+import fr.univ_amu.iut.DAO.JDBC.DAOEtudiantJDBC;
 import fr.univ_amu.iut.beans.Etudiant;
 
 import java.sql.Connection;
@@ -7,19 +10,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by t14001551 on 20/10/17.
  */
-public class TestEntite {
-    // La requete de test
+
+public class TestDAOEtudiant {
     static final String req = "SELECT * " +
-            "FROM ETUDIANT " +
-            "WHERE VILLE_ET = 'AIX-EN-PROVENCE'";
+            "FROM ETUDIANT ET, NOTATION NO " +
+            "WHERE ET.NUM_ET = NO.NUM_ET";
 
     public static void main(String[] args) throws SQLException {
         // Connexion a la base
-        System.out.println("Connexion");
+        System.out.println("Connexion ");
         try (Connection conn = ConnexionUnique.getInstance().getConnection()){
             System.out.println("Connecte\n");
             // Creation d'une instruction SQL
@@ -28,15 +32,21 @@ public class TestEntite {
             System.out.println("Execution de la requete : " + req );
             ResultSet rset = stmt.executeQuery(req);
             // Affichage du resultat
-            ArrayList<Etudiant> et = new ArrayList<Etudiant>();
+            List<Etudiant> etudiants = new ArrayList<>();
             while (rset.next()){
-                Etudiant etudiant= new Etudiant();
-                creerEtudiant(rset, etudiant);
-                et.add(etudiant);
-                System.out.print(etudiant);
+                DAOEtudiant dao = new DAOEtudiantJDBC();
+                Etudiant e = creerEtudiant(rset);
+                e= dao.insert(e);
+                etudiants.add(e);
             }
+
             // Fermeture de l'instruction (liberation des ressources)
             stmt.close();
+
+            for (Etudiant etudiant: etudiants) {
+                System.out.println(etudiant);
+            }
+
             System.out.println("\nOk.\n");
         } catch (SQLException e) {
             e.printStackTrace();// Arggg!!!
@@ -44,14 +54,15 @@ public class TestEntite {
         }
     }
 
-
-    private static void creerEtudiant(ResultSet rset, Etudiant etudiant) throws SQLException {
-        etudiant.setNumEt(rset.getInt("NUM_ET") );
+    private static Etudiant creerEtudiant(ResultSet rset) throws SQLException {
+        Etudiant etudiant = new Etudiant();
+        etudiant.setNumEt(rset.getInt("NUM_ET"));
         etudiant.setNomEt(rset.getString("NOM_ET"));
         etudiant.setPrenomEt(rset.getString("PRENOM_ET"));
-        etudiant.setAnnee(rset.getInt("ANNEE"));
-        etudiant.setVilleEt(rset.getString("VILLE_ET"));
         etudiant.setCpEt(rset.getString("CP_ET"));
+        etudiant.setVilleEt(rset.getString("VILLE_ET"));
+        etudiant.setAnnee(rset.getInt("ANNEE"));
         etudiant.setGroupe(rset.getInt("GROUPE"));
+        return etudiant;
     }
 }

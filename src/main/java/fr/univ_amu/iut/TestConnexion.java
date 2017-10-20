@@ -1,12 +1,10 @@
 package fr.univ_amu.iut;
 
 import java.sql.*;
-
 /**
  * Created by t14001551 on 25/09/17.
  */
-public class TestConnection {
-
+public class TestConnexion {
     // La requete de test
     static final String req = "SELECT NUM_ET, NOM_ET, PRENOM_ET " +
             "FROM ETUDIANT " +
@@ -15,7 +13,7 @@ public class TestConnection {
     public static void main(String[] args) throws SQLException {
         // Connexion a la base
         System.out.println("Connexion ");
-        try (Connection conn = ConnexionUnique.getInstance().getConnexion()){
+        try (Connection conn = ConnexionUnique.getInstance().getConnection()){
             System.out.println("Connecte\n");
             // Creation d'une instruction SQL
             Statement stmt = conn.createStatement();

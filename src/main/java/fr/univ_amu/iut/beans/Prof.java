@@ -71,16 +71,7 @@ public class Prof{
 		this.villeProf = villeProf;
 	}
 
-	@Override
-	public String toString() {
-		return "Prof [numProf=" + numProf + ", "
-				+ (nomProf != null ? "nomProf=" + nomProf + ", " : "")
-				+ (prenomProf != null ? "prenomProf=" + prenomProf + ", " : "")
-				+ (adrProf != null ? "adrProf=" + adrProf + ", " : "")
-				+ (cpProf != null ? "cpProf=" + cpProf + ", " : "")
-				+ (villeProf != null ? "villeProf=" + villeProf + ", " : "")
-				+ (matSpec != null ? "matSpec=" + matSpec.getCode() : "") + "]";
-	}
+
 
 	@Override
 	public boolean equals(Object o) {
@@ -90,23 +81,35 @@ public class Prof{
 		Prof prof = (Prof) o;
 
 		if (numProf != prof.numProf) return false;
-		if (!nomProf.equals(prof.nomProf)) return false;
-		if (!prenomProf.equals(prof.prenomProf)) return false;
-		if (!adrProf.equals(prof.adrProf)) return false;
-		if (!cpProf.equals(prof.cpProf)) return false;
-		if (!villeProf.equals(prof.villeProf)) return false;
-		return matSpec.equals(prof.matSpec);
+		if (nomProf != null ? !nomProf.equals(prof.nomProf) : prof.nomProf != null) return false;
+		if (prenomProf != null ? !prenomProf.equals(prof.prenomProf) : prof.prenomProf != null) return false;
+		if (adrProf != null ? !adrProf.equals(prof.adrProf) : prof.adrProf != null) return false;
+		if (cpProf != null ? !cpProf.equals(prof.cpProf) : prof.cpProf != null) return false;
+		if (villeProf != null ? !villeProf.equals(prof.villeProf) : prof.villeProf != null) return false;
+		return matSpec != null ? matSpec.equals(prof.matSpec) : prof.matSpec == null;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = numProf;
-		result = 31 * result + nomProf.hashCode();
-		result = 31 * result + prenomProf.hashCode();
-		result = 31 * result + adrProf.hashCode();
-		result = 31 * result + cpProf.hashCode();
-		result = 31 * result + villeProf.hashCode();
-		result = 31 * result + matSpec.hashCode();
+		result = 31 * result + (nomProf != null ? nomProf.hashCode() : 0);
+		result = 31 * result + (prenomProf != null ? prenomProf.hashCode() : 0);
+		result = 31 * result + (adrProf != null ? adrProf.hashCode() : 0);
+		result = 31 * result + (cpProf != null ? cpProf.hashCode() : 0);
+		result = 31 * result + (villeProf != null ? villeProf.hashCode() : 0);
+		result = 31 * result + (matSpec != null ? matSpec.hashCode() : 0);
 		return result;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Prof [numProf=" + numProf + ", "
+				+ (nomProf != null ? "nomProf=" + nomProf + ", " : "")
+				+ (prenomProf != null ? "prenomProf=" + prenomProf + ", " : "")
+				+ (adrProf != null ? "adrProf=" + adrProf + ", " : "")
+				+ (cpProf != null ? "cpProf=" + cpProf + ", " : "")
+				+ (villeProf != null ? "villeProf=" + villeProf + ", " : "")
+				+ (matSpec != null ? "matSpec=" + matSpec.getCode() : "") + "]";
 	}
 }

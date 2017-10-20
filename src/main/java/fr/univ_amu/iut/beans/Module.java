@@ -15,7 +15,7 @@ public class Module{
 	private Prof responsable;
 	private Module pere;
 	private Collection<Prof> specialistes;
-	
+
 	public Module() {
 	}
 
@@ -110,18 +110,6 @@ public class Module{
 	public Collection<Prof> getSpecialistes() {
 		return specialistes;
 	}
-	
-	@Override
-	public String toString() {
-		return "Module [" + (code != null ? "code=" + code + ", " : "")
-				+ (libelle != null ? "libelle=" + libelle + ", " : "")
-				+ "hCoursPrev=" + hCoursPrev + ", hCoursRea=" + hCoursRea
-				+ ", hTpPrev=" + hTpPrev + ", hTpRea=" + hTpRea + ", "
-				+ (discipline != null ? "discipline=" + discipline + ", " : "")
-				+ "coeffTest=" + coefTest + ", coefCc=" + coefCc + ", "
-				+ (responsable != null ? "responsable=" + responsable.getNomProf() + ", " : "")
-				+ (pere != null ? "pere=" + pere.getCode() : "") + "]";
-	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -136,28 +124,40 @@ public class Module{
 		if (hTpRea != module.hTpRea) return false;
 		if (coefTest != module.coefTest) return false;
 		if (coefCc != module.coefCc) return false;
-		if (!code.equals(module.code)) return false;
-		if (!libelle.equals(module.libelle)) return false;
-		if (!discipline.equals(module.discipline)) return false;
-		if (!responsable.equals(module.responsable)) return false;
-		if (!pere.equals(module.pere)) return false;
-		return specialistes.equals(module.specialistes);
+		if (code != null ? !code.equals(module.code) : module.code != null) return false;
+		if (libelle != null ? !libelle.equals(module.libelle) : module.libelle != null) return false;
+		if (discipline != null ? !discipline.equals(module.discipline) : module.discipline != null) return false;
+		if (responsable != null ? !responsable.equals(module.responsable) : module.responsable != null) return false;
+		if (pere != null ? !pere.equals(module.pere) : module.pere != null) return false;
+		return specialistes != null ? specialistes.equals(module.specialistes) : module.specialistes == null;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = code.hashCode();
-		result = 31 * result + libelle.hashCode();
+		int result = code != null ? code.hashCode() : 0;
+		result = 31 * result + (libelle != null ? libelle.hashCode() : 0);
 		result = 31 * result + hCoursPrev;
 		result = 31 * result + hCoursRea;
 		result = 31 * result + hTpPrev;
 		result = 31 * result + hTpRea;
-		result = 31 * result + discipline.hashCode();
+		result = 31 * result + (discipline != null ? discipline.hashCode() : 0);
 		result = 31 * result + coefTest;
 		result = 31 * result + coefCc;
-		result = 31 * result + responsable.hashCode();
-		result = 31 * result + pere.hashCode();
-		result = 31 * result + specialistes.hashCode();
+		result = 31 * result + (responsable != null ? responsable.hashCode() : 0);
+		result = 31 * result + (pere != null ? pere.hashCode() : 0);
+		result = 31 * result + (specialistes != null ? specialistes.hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Module [" + (code != null ? "code=" + code + ", " : "")
+				+ (libelle != null ? "libelle=" + libelle + ", " : "")
+				+ "hCoursPrev=" + hCoursPrev + ", hCoursRea=" + hCoursRea
+				+ ", hTpPrev=" + hTpPrev + ", hTpRea=" + hTpRea + ", "
+				+ (discipline != null ? "discipline=" + discipline + ", " : "")
+				+ "coeffTest=" + coefTest + ", coefCc=" + coefCc + ", "
+				+ (responsable != null ? "responsable=" + responsable.getNomProf() + ", " : "")
+				+ (pere != null ? "pere=" + pere.getCode() : "") + "]";
 	}
 }

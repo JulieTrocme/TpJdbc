@@ -6,15 +6,15 @@ public class Etudiant {
 	private String prenomEt;
 	private String cpEt;
 	private String villeEt;
-	
+
 	private int annee;
 	private int groupe;
 
 	public Etudiant() {
 	}
-	
+
 	public Etudiant(int numEt, String nomEt, String prenomEt, String cpEt,
-			String villeEt, int annee, int groupe) {
+					String villeEt, int annee, int groupe) {
 		this.numEt = numEt;
 		this.nomEt = nomEt;
 		this.prenomEt = prenomEt;
@@ -81,17 +81,6 @@ public class Etudiant {
 	}
 
 	@Override
-	public String toString() {
-		return "Etudiant [numEt=" + numEt + ", "
-				+ (nomEt != null ? "nomEt=" + nomEt + ", " : "")
-				+ (prenomEt != null ? "prenomEt=" + prenomEt + ", " : "")
-				+ (cpEt != null ? "cpEt=" + cpEt + ", " : "")
-				+ (villeEt != null ? "villeEt=" + villeEt + ", " : "")
-				+ "annee=" + annee + ", groupe=" + groupe + ", "
-				+ "]";
-	}
-
-	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
@@ -101,21 +90,32 @@ public class Etudiant {
 		if (numEt != etudiant.numEt) return false;
 		if (annee != etudiant.annee) return false;
 		if (groupe != etudiant.groupe) return false;
-		if (!nomEt.equals(etudiant.nomEt)) return false;
-		if (!prenomEt.equals(etudiant.prenomEt)) return false;
-		if (!cpEt.equals(etudiant.cpEt)) return false;
-		return villeEt.equals(etudiant.villeEt);
+		if (nomEt != null ? !nomEt.equals(etudiant.nomEt) : etudiant.nomEt != null) return false;
+		if (prenomEt != null ? !prenomEt.equals(etudiant.prenomEt) : etudiant.prenomEt != null) return false;
+		if (cpEt != null ? !cpEt.equals(etudiant.cpEt) : etudiant.cpEt != null) return false;
+		return villeEt != null ? villeEt.equals(etudiant.villeEt) : etudiant.villeEt == null;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = numEt;
-		result = 31 * result + nomEt.hashCode();
-		result = 31 * result + prenomEt.hashCode();
-		result = 31 * result + cpEt.hashCode();
-		result = 31 * result + villeEt.hashCode();
+		result = 31 * result + (nomEt != null ? nomEt.hashCode() : 0);
+		result = 31 * result + (prenomEt != null ? prenomEt.hashCode() : 0);
+		result = 31 * result + (cpEt != null ? cpEt.hashCode() : 0);
+		result = 31 * result + (villeEt != null ? villeEt.hashCode() : 0);
 		result = 31 * result + annee;
 		result = 31 * result + groupe;
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Etudiant [numEt=" + numEt + ", "
+				+ (nomEt != null ? "nomEt=" + nomEt + ", " : "")
+				+ (prenomEt != null ? "prenomEt=" + prenomEt + ", " : "")
+				+ (cpEt != null ? "cpEt=" + cpEt + ", " : "")
+				+ (villeEt != null ? "villeEt=" + villeEt + ", " : "")
+				+ "annee=" + annee + ", groupe=" + groupe + ", "
+				+ "]";
 	}
 }
